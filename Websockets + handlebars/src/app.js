@@ -6,33 +6,55 @@ import routerCart from './routes/carts.js'
 import { engine } from 'express-handlebars';
 import { createServer } from "node:http";
 import { Server } from "socket.io";
+import routerHome from './routes/home.js';
+import { routerRealTime } from './routes/realTimeProducts.js';
+import { ProductManager } from "./models/productManager.js";
 
+const productManager = new ProductManager('./products.json'); 
 
-const PORT = 8080
+const PORT = 8080;
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-//Middlewares
-app.use(express.json()) //Permitir enviar y recibir archivos JSON
-app.use(express.urlencoded({ extended: true })) //Permitir extensiones en la url
-app.use(express.static(__dirname+'/public'))
-//app.use('/static', express.static(path.join(__dirname, '/public')))
-//console.log(path.join(__dirname, '/public'))
+// Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-
-//Handlebars
+// Handlebars
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
-app.set('views', __dirname+"/views");
+app.set('views', path.join(__dirname, 'views'));
 
-//Routes
-app.use('/api/products', routerProd)
-app.use('/api/carts', routerCart)
+// Routes
+app.use('/api/products', routerProd);
+app.use('/api/carts', routerCart);
+app.use('/home', routerHome);
+app.use('/realtimeproducts', routerRealTime);
 
-//Socket
+// Socket eventos
+io.on("connection", (socket) => {
+    console.log("usuario conectado");
+  
+    socket.on("getProducts", async () => {
+      const products = await productManager.getProducts();
+      io.emit("prodsData", products);
+    });
+  
+    socket.on("newProduct", async (newProd) => {
+      console.log(newProd);
+      await productManager.addProduct(newProd);
+      const products = await productManager.getProducts();
+      io.emit("prodsData", products);
+    });
 
+    socket.on("removeProduct", async (prodId) => {
+      await productManager.deleteProduct(prodId);
+      io.emit("productRemoved", prodId); 
+    });
+  });
 
 server.listen(PORT, () => {
-    console.log(`Servidor escuchando ${PORT}`)
+  console.log(`Server listening on port ${PORT}`);
 });
