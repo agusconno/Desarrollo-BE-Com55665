@@ -83,19 +83,17 @@
       document.getElementById('modal').style.display = 'none';
     }
 
-    // Manejar el evento de envío del formulario para agregar un nuevo producto
+    // Manejar el evento de envío del formulario 
     document.getElementById('newProductForm').addEventListener('submit', function (event) {
       event.preventDefault();
 
       const newProductData = {
         title: document.getElementById('title').value,
-        // Agrega otros campos según sea necesario
+        // Agrega otros campos 
       };
 
-      // Envia los datos del nuevo producto al servidor a través de WebSocket
       socket.emit('newProduct', newProductData);
 
-      // Cierra el modal después de enviar el formulario
       closeModal();
     });
   </script>

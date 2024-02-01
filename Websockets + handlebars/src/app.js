@@ -10,7 +10,7 @@ import routerHome from './routes/home.js';
 import { routerRealTime } from './routes/realTimeProducts.js';
 import { ProductManager } from "./models/productManager.js";
 
-const productManager = new ProductManager('./products.json'); 
+const productManager = new ProductManager('../products.json'); 
 
 const PORT = 8080;
 const app = express();
