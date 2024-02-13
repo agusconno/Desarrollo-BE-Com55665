@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="/src/Public/css/chat.css">
+</head>
+
+<body>
+    <div id="chat-container">
+        <div id="chat-messages">
+            {{#each messages}}
+            <div class="message">
+                <strong>{{this.user}}</strong>: {{this.message}}
+            </div>
+            {{/each}}
+        </div>
+        <div id="chat-input">
+            <input type="text" id="message-input" placeholder="Escribe tu mensaje...">
+            <button id="send-button">Enviar</button>
+        </div>
+    </div>
+
+    <script src="/js/chat.js"></script>
+</body>
+
+</html>
+
