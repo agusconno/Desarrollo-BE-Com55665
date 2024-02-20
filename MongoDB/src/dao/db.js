@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 
 function connect() {
-  return mongoose.connect("mongodb+srv://agustinaconno:HFA0xhF46QF1mdZV@proyectoecommerce.r4otykh.mongodb.net/", {
+  return mongoose.connect("mongodb+srv://agustinaconno:LTiEZx9zFmkxi2aV@clusterbe.plhgerh.mongodb.net/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true
+    //useFindAndModify: false,
+    //useCreateIndex: true
   })
   .then(() => {
     console.log("Base de datos conectada correctamente.");

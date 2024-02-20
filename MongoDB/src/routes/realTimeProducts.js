@@ -1,10 +1,10 @@
 import { Router } from "express";
 
 
-const routerRealTime = Router();
+const routerRealTimeProducts = Router();
 
 //configuro la ruta para renderizar la vista
-routerRealTime.get('/', (req, res) => {
+routerRealTimeProducts.get('/', (req, res) => {
   res.render('pages/realTimeProducts', {
     styles: "/styles",
     js: "/realTimeProducts.js"
@@ -12,4 +12,4 @@ routerRealTime.get('/', (req, res) => {
 });
 
 
-export { routerRealTime };
+export { routerRealTimeProducts };

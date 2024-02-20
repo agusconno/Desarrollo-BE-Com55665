@@ -1,4 +1,4 @@
-import Message from '../models/messageModel.js';
+import Message from '../models/messagesModel.js';
 
 export class MessagesManager {
   async sendMessage(user, message) {

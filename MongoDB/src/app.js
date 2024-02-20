@@ -8,13 +8,13 @@ import { Server } from "socket.io";
 
 // Rutas y managers
 import routerProd from "./routes/products.js";
-import routerCart from "./routes/cart.js";
+import routerCart from "./routes/carts.js";
 import routerHome from "./routes/home.js";
-import routerRealTimeProducts from "./routes/realTimeProducts.js";
+import { routerRealTimeProducts } from "./routes/realTimeProducts.js";
 import chatRouter from "./routes/chat.js";
 
-import ProductManager from "./dao/managers/productManager.js";
-import { MessagesManager } from "./dao/managers/messages.js"; // Importar MessagesManager
+import { ProductManager } from "./dao/managers/productManager.js";
+import { MessagesManager } from "./dao/managers/message.js"; // Importar MessagesManager
 
 const productManager = new ProductManager();
 const messagesManager = new MessagesManager(); // Instanciar MessagesManager
